@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#120d08">
+  <meta name="description" content="تحدي النرد التفاعلي من UNO CAFE LOUNGE — العب بحركة إيدك قدام الكاميرا واربح خصمك!">
+  <title>UNO CAFE LOUNGE | تحدي النرد</title>
+
+  <link rel="icon" type="image/png" href="assets/uno-cafe-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-screen="welcome">
+
+  <a class="skip-link" href="#stage">تجاوز إلى المحتوى</a>
+
+  <!-- ======= الشريط العلوي ======= -->
+  <header id="topbar">
+    <div class="logo-wrap small">
+      <img class="brand-logo" alt="شعار UNO CAFE LOUNGE">
+      <div class="logo-fallback" hidden>UNO CAFE LOUNGE</div>
+    </div>
+    <span class="brand-name-text" aria-hidden="true"></span>
+    <span class="title-chip">تحدي النرد</span>
+  </header>
+
+  <!-- ======= المسرح الرئيسي ======= -->
+  <main id="stage">
+
+    <!-- شاشة الترحيب -->
+    <section id="screen-welcome" class="screen active" aria-live="polite">
+      <div class="logo-wrap big">
+        <img class="brand-logo" alt="شعار UNO CAFE LOUNGE">
+        <div class="logo-fallback" hidden>UNO CAFE LOUNGE</div>
+      </div>
+      <p class="greeting">أهلاً بك في تحدي أونو!</p>
+      <h1 class="game-title">تحدي النرد</h1>
+      <p class="subtitle">جرّب حظك واربح خصمك!</p>
+      <div class="hand-hint" aria-hidden="true">
+        <span class="pulse-ring r1"></span>
+        <span class="pulse-ring r2"></span>
+        <svg class="hand-svg" viewBox="0 0 64 64" width="72" height="72">
+          <g stroke="currentColor" stroke-width="3.2" stroke-linecap="round" fill="none">
+            <path d="M23 37V16.5a3 3 0 0 1 6 0V33"/>
+            <path d="M29 33V13.5a3 3 0 0 1 6 0V33"/>
+            <path d="M35 33V15a3 3 0 0 1 6 0v18"/>
+            <path d="M41 35V19.5a3 3 0 0 1 6 0V38"/>
+            <path d="M23 37c-2.4-2.7-5.6-6.4-7.4-8.5-1.7-2-4.7-.3-3.6 2.3 1.5 3.5 4.8 9.4 7.4 13.2C22.6 49.4 27.2 53 33.6 53 42 53 47 46.8 47 38.6V19.5"/>
+          </g>
+        </svg>
+      </div>
+      <p class="instruction">ارفع إيدك قدام الكاميرا وابدأ التحدي</p>
+      <p class="camera-note">إذا ظهرت رسالة من المتصفح تطلب إذن الكاميرا اختر «السماح» — العبّارة كاملة بحركة إيدك بدون لمس الشاشة.</p>
+      <p id="odds-note" class="odds-note" hidden>هذا التحدي ترفيهي — احتمالات الجوائز محددة مسبقاً من إدارة الكافيه.</p>
+    </section>
+
+    <!-- شاشة تشغيل الكاميرا -->
+    <section id="screen-camera" class="screen" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <h2 class="screen-title">جاري تشغيل الكاميرا...</h2>
+      <p class="instruction">وجّه إيدك نحو الكاميرا بعد قليل</p>
+      <p class="camera-note">إذا ظهرت رسالة طلب الوصول للكاميرا، اختر «السماح» حتى نقدر نشوف إيدك.</p>
+    </section>
+
+    <!-- شاشة انتظار اليد -->
+    <section id="screen-waiting" class="screen" aria-live="polite">
+      <div class="hand-hint" aria-hidden="true">
+        <span class="pulse-ring r1"></span>
+        <span class="pulse-ring r2"></span>
+        <svg class="hand-svg" viewBox="0 0 64 64" width="88" height="88">
+          <g stroke="currentColor" stroke-width="3.2" stroke-linecap="round" fill="none">
+            <path d="M23 37V16.5a3 3 0 0 1 6 0V33"/>
+            <path d="M29 33V13.5a3 3 0 0 1 6 0V33"/>
+            <path d="M35 33V15a3 3 0 0 1 6 0v18"/>
+            <path d="M41 35V19.5a3 3 0 0 1 6 0V38"/>
+            <path d="M23 37c-2.4-2.7-5.6-6.4-7.4-8.5-1.7-2-4.7-.3-3.6 2.3 1.5 3.5 4.8 9.4 7.4 13.2C22.6 49.4 27.2 53 33.6 53 42 53 47 46.8 47 38.6V19.5"/>
+          </g>
+        </svg>
+      </div>
+      <h2 class="screen-title">تم اكتشاف اليد؟ وجّهها وثبّتها</h2>
+      <p id="inst-waiting" class="instruction">وجّه إيدك نحو الكاميرا</p>
+    </section>
+
+    <!-- شاشة العد التنازلي -->
+    <section id="screen-countdown" class="screen" aria-live="polite">
+      <p id="count-label" class="count-label">تم اكتشاف اليد! استعد للتحدي.</p>
+      <div id="count-value" class="count-value pop" data-kind="prepare">استعد!</div>
+    </section>
+
+    <!-- شاشة إيماءة الرمي -->
+    <section id="screen-gesture" class="screen" aria-live="polite">
+      <h2 class="screen-title">استعد!</h2>
+      <p id="inst-gesture" class="instruction">سكّر إيدك، وبعدين افتحها لترمي النرد!</p>
+      <ol id="gesture-steps" class="gesture-steps" data-phase="palm">
+        <li data-step="palm"><span class="step-num">١</span> ارفع إيدك مفتوحة</li>
+        <li data-step="fist"><span class="step-num">٢</span> سكّر إيدك كامل</li>
+        <li data-step="open"><span class="step-num">٣</span> افتحها بسرعة لترمي النرد!</li>
+      </ol>
+    </section>
+
+    <!-- شاشة رمي النرد -->
+    <section id="screen-rolling" class="screen" aria-live="polite">
+      <div id="dice-scene" class="dice-scene" aria-hidden="true">
+        <div class="dice-shadow"></div>
+        <div class="dice-bounce">
+          <div class="dice-float">
+            <div id="dice-cube" class="dice-cube">
+              <div class="dice-face f1">
+                <span class="pip" style="grid-area:2/2"></span>
+              </div>
+              <div class="dice-face f2">
+                <span class="pip" style="grid-area:1/1"></span>
+                <span class="pip" style="grid-area:3/3"></span>
+              </div>
+              <div class="dice-face f3">
+                <span class="pip" style="grid-area:1/1"></span>
+                <span class="pip" style="grid-area:2/2"></span>
+                <span class="pip" style="grid-area:3/3"></span>
+              </div>
+              <div class="dice-face f4">
+                <span class="pip" style="grid-area:1/1"></span>
+                <span class="pip" style="grid-area:1/3"></span>
+                <span class="pip" style="grid-area:3/1"></span>
+                <span class="pip" style="grid-area:3/3"></span>
+              </div>
+              <div class="dice-face f5">
+                <span class="pip" style="grid-area:1/1"></span>
+                <span class="pip" style="grid-area:1/3"></span>
+                <span class="pip" style="grid-area:2/2"></span>
+                <span class="pip" style="grid-area:3/1"></span>
+                <span class="pip" style="grid-area:3/3"></span>
+              </div>
+              <div class="dice-face f6">
+                <span class="pip" style="grid-area:1/1"></span>
+                <span class="pip" style="grid-area:2/1"></span>
+                <span class="pip" style="grid-area:3/1"></span>
+                <span class="pip" style="grid-area:1/3"></span>
+                <span class="pip" style="grid-area:2/3"></span>
+                <span class="pip" style="grid-area:3/3"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p id="inst-rolling" class="instruction">جاري رمي النرد...</p>
+    </section>
+
+    <!-- شاشة الجائزة -->
+    <section id="screen-reward" class="screen" aria-live="polite">
+      <div id="reward-card" class="reward-card">
+        <div class="logo-wrap tiny">
+          <img class="brand-logo" alt="شعار UNO CAFE LOUNGE">
+          <div class="logo-fallback" hidden>UNO CAFE LOUNGE</div>
+        </div>
+        <div class="reward-result-row">
+          <span class="reward-result-label">نتيجة النرد</span>
+          <span id="reward-result" class="reward-result-badge">1</span>
+        </div>
+        <h2 id="reward-title" class="reward-title">مبروك! ربحت خصمك</h2>
+        <div id="reward-percent" class="reward-percent">—</div>
+        <p class="cashier-note">اعرض النتيجة للكاشير للحصول على جائزتك.</p>
+        <p class="reward-code-label">كود الجائزة</p>
+        <p id="reward-code" class="reward-code">UNO-XXXXXXXX</p>
+        <p id="reward-terms" class="reward-terms"></p>
+      </div>
+      <p class="restart-hint">إذا بدك تلعب مرة ثانية، سكّر إيدك وثبّتها لمدة ثانية.</p>
+    </section>
+
+    <!-- شاشة الخطأ -->
+    <section id="screen-error" class="screen" aria-live="assertive">
+      <svg class="error-icon" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
+        <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" stroke-width="4"/>
+        <line x1="32" y1="18" x2="32" y2="36" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="32" cy="45" r="3.2" fill="currentColor"/>
+      </svg>
+      <h2 id="error-title" class="screen-title">تعذّر تشغيل الكاميرا</h2>
+      <p id="error-detail" class="instruction"></p>
+      <ul id="error-steps" class="error-steps"></ul>
+      <p class="camera-note">سيتم إعادة المحاولة تلقائياً عند توفر الكاميرا.</p>
+    </section>
+  </main>
+
+  <!-- ======= معاينة الكاميرا + طبقة رسم اليد ======= -->
+  <div id="camera-preview" class="camera-preview" aria-hidden="true">
+    <video id="camera-video" autoplay muted playsinline></video>
+    <canvas id="hand-canvas"></canvas>
+    <span id="gesture-badge" class="gesture-badge"></span>
+  </div>
+
+  <!-- ======= إشعار الخصوصية ======= -->
+  <footer id="footer-note">
+    <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+      <path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 8V7a3 3 0 0 1 6 0v3H9z" fill="currentColor"/>
+    </svg>
+    <span id="privacy-note"></span>
+  </footer>
+
+  <!-- ======= لوحة المطور (testMode فقط) ======= -->
+  <aside id="dev-panel" class="dev-panel" hidden>
+    <h3>وضع المطور — تشخيص</h3>
+    <dl class="diag">
+      <dt>الحالة</dt><dd id="diag-state">-</dd>
+      <dt>الإيماءة</dt><dd id="diag-gesture">-</dd>
+      <dt>الثبات</dt><dd id="diag-held">-</dd>
+      <dt>FPS</dt><dd id="diag-fps">-</dd>
+      <dt>رميات الجلسة</dt><dd id="diag-throws">-</dd>
+      <dt>الكاميرا</dt><dd id="diag-cam">-</dd>
+    </dl>
+    <h4>محاكاة إيماءة</h4>
+    <div class="dev-row">
+      <button id="dev-btn-palm" type="button">كف مفتوح</button>
+      <button id="dev-btn-fist" type="button">قبضة</button>
+      <button id="dev-btn-none" type="button">بلا يد</button>
+    </div>
+    <h4>فرض نتيجة النرد</h4>
+    <div class="dev-row">
+      <input id="dev-force" type="number" min="1" max="6" value="6" inputmode="numeric">
+      <button id="dev-btn-force" type="button">تطبيق</button>
+    </div>
+    <div class="dev-row">
+      <button id="dev-btn-rewards" type="button">عرض الجوائز</button>
+      <button id="dev-btn-cam" type="button">إيقاف/تشغيل الكاميرا</button>
+      <button id="dev-btn-reset" type="button">تصفير الجلسة</button>
+    </div>
+    <h4>سجل الأحداث</h4>
+    <pre id="dev-log" class="dev-log"></pre>
+  </aside>
+
+  <noscript>
+    <p style="color:#f7efdf;text-align:center;padding:16px;font-family:sans-serif;">
+      هذي اللعبة تحتاج تشغيل JavaScript في المتصفح.
+    </p>
+  </noscript>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNO CAFE LOUNGE — اختبارات آلية</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --gold: #d4a24e; --cream: #f7efdf; --ok: #7fc98f; --bad: #e0684f; --muted: #b3a284; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Tajawal", "Cairo", sans-serif;
+      background: #120d08; color: var(--cream);
+      padding: 32px 18px; max-width: 860px; margin-inline: auto; line-height: 1.7;
+    }
+    h1 { font-family: "Cairo"; color: var(--gold); font-size: 26px; margin-bottom: 4px; }
+    .sub { color: var(--muted); font-size: 14px; margin-bottom: 22px; }
+    .sub a { color: var(--gold); text-decoration: none; }
+    .summary {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 22px;
+      font-family: "Cairo"; font-weight: 700;
+    }
+    .chip { border-radius: 12px; padding: 10px 18px; border: 1px solid rgba(212,162,78,.3); background: rgba(255,244,224,.04); }
+    .chip.ok { color: var(--ok); }
+    .chip.bad { color: var(--bad); }
+    .suite { margin-bottom: 20px; border: 1px solid rgba(212,162,78,.2); border-radius: 14px; overflow: hidden; }
+    .suite h2 { font-family: "Cairo"; font-size: 16px; background: rgba(212,162,78,.1); padding: 10px 16px; }
+    .t { display: flex; gap: 10px; padding: 8px 16px; border-top: 1px solid rgba(255,255,255,.04); font-size: 14.5px; align-items: baseline; }
+    .t .mark { font-weight: 900; flex: none; }
+    .t.pass .mark { color: var(--ok); }
+    .t.fail .mark { color: var(--bad); }
+    .t.fail .err { color: #f0b7a8; font-size: 13px; display: block; margin-top: 2px; }
+    .t .name { flex: 1; }
+  </style>
+</head>
+<body>
+  <h1>اختبارات تحدي النرد الآلية</h1>
+  <p class="sub">
+    تغطي: محرك الاحتمالات، الجوائز، كشف الإيماءات، وآلة الحالة —
+    <a href="index.html">← رجوع للعبة</a> | التعليمات اليدوية (الكاميرا والأنيميشن) في README.md
+  </p>
+  <div id="summary" class="summary"></div>
+  <div id="out"></div>
+
+  <script type="module">
+    import { runAllTests } from "./js/tests.js";
+
+    const r = runAllTests();
+    const summary = document.getElementById("summary");
+    summary.innerHTML = `
+      <div class="chip">إجمالي: ${r.total}</div>
+      <div class="chip ok">ناجح: ${r.passed}</div>
+      <div class="chip ${r.failed ? "bad" : "ok"}">فاشل: ${r.failed}</div>
+      <div class="chip">${r.failed === 0 ? "✓ كل الاختبارات ناجحة" : "✗ يوجد اختبارات فاشلة"}</div>
+    `;
+    const out = document.getElementById("out");
+    for (const s of r.results) {
+      const div = document.createElement("div");
+      div.className = "suite";
+      div.innerHTML = `<h2>${s.name} — ${s.passed}/${s.tests.length}</h2>`;
+      for (const t of s.tests) {
+        const row = document.createElement("div");
+        row.className = `t ${t.pass ? "pass" : "fail"}`;
+        row.innerHTML = `<span class="mark">${t.pass ? "✓" : "✗"}</span><span class="name">${t.name}</span>`;
+        if (!t.pass) {
+          const err = document.createElement("span");
+          err.className = "err";
+          err.textContent = t.error || "";
+          row.appendChild(err);
+        }
+        div.appendChild(row);
+      }
+      out.appendChild(div);
+    }
+    document.title = `${r.failed === 0 ? "✓" : "✗"} ${r.passed}/${r.total} — اختبارات تحدي النرد`;
+  </script>
+</body>
+</html>
